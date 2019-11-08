@@ -14,12 +14,26 @@ import {
   View,
   Text,
   StatusBar,
-  Button
+  Button,
+  FlatList
 } from 'react-native';
-
+import axios from 'axios';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 class HomeScreen extends React.Component {
+
+  componentDidMount(){
+    let zipcode = 'e2806317470142cba44f9d56d57e8460';
+    axios.get(`https://newsapi.org/v2/top-headlines?country=jp&apiKey=${zipcode}`)
+        .then(function (response) {
+            console.log(response.data.articles);
+        })
+        .catch(function (response) {
+            console.log(response);
+        });
+  }
+
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
