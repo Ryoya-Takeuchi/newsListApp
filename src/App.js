@@ -14,7 +14,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './screen/HomeScreen'
 import DetailsScreen from './screen/DetailsScreen'
 
-const RootStack = createStackNavigator(
+const RootStack = createSwitchNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
