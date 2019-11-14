@@ -4,7 +4,8 @@
 Overview
 
 ## Description
-ニュースアプリ。
+react-nativeでNewsApiを利用してアプリを表示する。
+
 
 ## Demo
 

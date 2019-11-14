@@ -2,7 +2,9 @@ import React,{useState,useEffect} from 'react';
 import {
   View,
   FlatList,
-  Image
+	Image,
+	Dimensions,
+	StyleSheet,
 } from 'react-native';
 import axios from 'axios';
 import { Icon,Button,Text,List, ListItem,Container,Left,Right,Body } from 'native-base';
@@ -18,7 +20,8 @@ HomeScreen.navigationOptions = {
   };
 
 export default function HomeScreen(props) {
-    const [newsList , setlist] = useState([]);
+		const [newsList , setlist] = useState([]);
+		const win = Dimensions.get('window');
 
     useEffect(() => {
       // console.log(API_KEY);
@@ -67,27 +70,35 @@ export default function HomeScreen(props) {
 		} 
   
     return (
-      <Container>
-        <List style={{flex:1}}>
-        <FlatList
-						style={{flex :1}}
-            data={newsList}
-            keyExtractor={(item,index) => item.toString()}
-            renderItem={({ item,index }) => (
-              <ListItem thumbnail style={{marginLeft :-5}} onPress={() => props.navigation.navigate('Details',{item : item})}>
-                  <Body>
-                    <Text>{item.title}</Text>
-                    <Text note numberOfLines={1}>Its time to build a difference . .</Text>
-                  </Body>
-                  <Right>
-                    {modules.setImage(item.urlToImage,70,70)}
-                  </Right>
-                  <Toast ref="toast"/>
-              </ListItem>
-            )}
-        />
+      <Container style={styles.Container}>
+        <List style={styles.list}>
+					<FlatList
+							style={{flex :1}}
+							data={newsList}
+							keyExtractor={(item,index) => item.toString()}
+							renderItem={({ item,index }) => (
+								<ListItem thumbnail onPress={() => props.navigation.navigate('Details',{item : item})}>
+										<Body>
+											<Text>{item.title}</Text>
+										</Body>
+										<Right>
+											{modules.setImage(item.urlToImage , win.width/5 , win.height/10 , win.width/16)}
+										</Right>
+										<Toast ref="toast"/>
+								</ListItem>
+							)}
+					/>
         </List>
       </Container>
     );
   }
-  
+	
+	
+	const styles = StyleSheet.create({
+		Container  :{
+			flex  :1
+		},
+		list : {
+			flex  :1
+		}
+	});
