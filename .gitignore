@@ -58,7 +58,8 @@ buck-out/
 
 
 #追記
-/.env
+native/.env
+.env
 
 # CocoaPods
 /ios/Pods/
