@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 } from 'react-native';
 import axios from 'axios';
-import { Icon,Button,Text,List, ListItem,Container,Left,Right,Body } from 'native-base';
+import { Icon,Button,Text,List, ListItem,Container,Left,Right,Body,Header,Content,Title } from 'native-base';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from "@react-native-community/netinfo";   //ネットワークテスト
@@ -71,24 +71,42 @@ export default function HomeScreen(props) {
   
     return (
       <Container style={styles.Container}>
-        <List style={styles.list}>
-					<FlatList
-							style={{flex :1}}
-							data={newsList}
-							keyExtractor={(item,index) => item.toString()}
-							renderItem={({ item,index }) => (
-								<ListItem thumbnail onPress={() => props.navigation.navigate('Details',{item : item})}>
-										<Body>
-											<Text>{item.title}</Text>
-										</Body>
-										<Right>
-											{modules.setImage(item.urlToImage , win.width/5 , win.height/10 , win.width/16)}
-										</Right>
-										<Toast ref="toast"/>
-								</ListItem>
-							)}
-					/>
-        </List>
+				 <Header>
+          <Left>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>News一覧</Title>
+          </Body>
+          <Right >
+						{/* <Button transparent iconLeft onPress={() => props.navigation.navigate('Home')}>
+              <Icon name='arrow-back' style={{fontSize: 20, color: '#c5c5c5'}} />
+							<Text>戻る</Text>
+            </Button> */}
+					</Right>
+        </Header>
+				<Content>
+					<List style={styles.list}>
+						<FlatList
+								style={{flex :1}}
+								data={newsList}
+								keyExtractor={(item,index) => item.toString()}
+								renderItem={({ item,index }) => (
+									<ListItem key={index} thumbnail onPress={() => props.navigation.navigate('Details',{item : item})}>
+											<Body>
+												<Text>{item.title}</Text>
+											</Body>
+											<Right>
+												{modules.setImage(item.urlToImage , win.width/6 , win.height/15 , win.width/16)}
+											</Right>
+											<Toast ref="toast"/>
+									</ListItem>
+								)}
+						/>
+					</List>
+				</Content>
       </Container>
     );
   }
